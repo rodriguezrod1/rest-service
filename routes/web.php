@@ -1,6 +1,7 @@
 <?php
 
 /** @var \Laravel\Lumen\Routing\Router $router */
+use App\Http\Controllers\SoapClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,11 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->post('register-client', 'SoapClientController@registerClient');
+$router->post('load-wallet', 'SoapClientController@loadWallet');
+$router->post('pay', 'SoapClientController@pay');
+$router->post('confirm-payment', 'SoapClientController@confirmPayment');
+$router->post('check-balance', 'SoapClientController@checkBalance');
+
