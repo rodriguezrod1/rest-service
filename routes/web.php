@@ -23,5 +23,5 @@ $router->post('register-client', 'SoapClientController@registerClient');
 $router->post('load-wallet', 'SoapClientController@loadWallet');
 $router->post('pay', 'SoapClientController@pay');
 $router->post('confirm-payment', 'SoapClientController@confirmPayment');
-$router->post('check-balance', 'SoapClientController@checkBalance');
+$router->get('check-balance', 'SoapClientController@checkBalance');
 
