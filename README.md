@@ -1,10 +1,7 @@
 # Servicio Soap Cliente 
 
-## Requisitos
-- PHP 8.0.x
-- Composer
-- Laravel Lumen
-- php-soap
+
+Creado por Lcdo. Rod Rodríguez, utilizando buenas practicas. 
 
 
 
