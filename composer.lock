@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92349cb28edd03fc664907cf9290705c",
+    "content-hash": "13ee6ea7107e2287346802b7b9121ecc",
     "packages": [
         {
             "name": "brick/math",
@@ -3232,6 +3232,70 @@
                 }
             ],
             "time": "2024-04-27T21:32:50+00:00"
+        },
+        {
+            "name": "ricorocks-digital-agency/soap",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ricorocks-Digital-Agency/Soap.git",
+                "reference": "f4eeff3133abc8e147ed5065c84bef3a30b8239f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ricorocks-Digital-Agency/Soap/zipball/f4eeff3133abc8e147ed5065c84bef3a30b8239f",
+                "reference": "f4eeff3133abc8e147ed5065c84bef3a30b8239f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^10.0|^11.0",
+                "php": "^8.1|^8.2|^8.3"
+            },
+            "require-dev": {
+                "ext-soap": "*",
+                "laravel/pint": "^1.14",
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^8.0|^9.0",
+                "pestphp/pest": "^2.0",
+                "phpoption/phpoption": "^1.8.1",
+                "spatie/ray": "^1.17"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RicorocksDigitalAgency\\Soap\\Providers\\SoapServiceProvider"
+                    ],
+                    "aliases": {
+                        "Soap": "RicorocksDigitalAgency\\Soap\\Facades\\Soap"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RicorocksDigitalAgency\\Soap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Luke Downing",
+                    "email": "luke@ricorocks.agency"
+                },
+                {
+                    "name": "Sam Rowden",
+                    "email": "sam@ricorocks.agency"
+                }
+            ],
+            "description": "A SOAP client that provides a clean interface for handling requests and responses.",
+            "support": {
+                "issues": "https://github.com/Ricorocks-Digital-Agency/Soap/issues",
+                "source": "https://github.com/Ricorocks-Digital-Agency/Soap/tree/2.0.0"
+            },
+            "time": "2024-03-19T12:59:19+00:00"
         },
         {
             "name": "symfony/console",

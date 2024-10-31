@@ -1,6 +1,6 @@
 <?php
 
-/** @var \Laravel\Lumen\Routing\Router $router */
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SoapClientController;
 
 /*
@@ -19,9 +19,10 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->post('register-client', 'SoapClientController@registerClient');
-$router->post('load-wallet', 'SoapClientController@loadWallet');
-$router->post('pay', 'SoapClientController@pay');
-$router->post('confirm-payment', 'SoapClientController@confirmPayment');
-$router->get('check-balance', 'SoapClientController@checkBalance');
-
+Route::group(['prefix' => 'api'], function () {
+    Route::post('/register-client', [SoapClientController::class, 'registerClient']);
+    Route::post('/load-wallet', [SoapClientController::class, 'loadWallet']);
+    Route::post('/pay', [SoapClientController::class, 'pay']);
+    Route::post('/confirm-payment', [SoapClientController::class, 'confirmPayment']);
+    Route::post('/check-balance', [SoapClientController::class, 'checkBalance']);
+});

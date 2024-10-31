@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use SoapClient;
+use RicorocksDigitalAgency\Soap\Facades\Soap;
 
 class SoapClientController extends Controller
 {
@@ -16,7 +16,7 @@ class SoapClientController extends Controller
      */
     public function __construct()
     {
-        $options = [
+        $this->soapClient = Soap::create('http://localhost:8001/soap?wsdll', [
             'trace' => 1,
             'exceptions' => true,
             'stream_context' => stream_context_create([
@@ -25,116 +25,61 @@ class SoapClientController extends Controller
                     'verify_peer_name' => false,
                 ],
             ]),
-        ];
-
-        $this->soapClient = new SoapClient('http://localhost:8001/soap?wsdll', $options);
+        ]);
     }
-
-
 
     public function registerClient(Request $request)
     {
         try {
-            $response = $this->soapClient->__soapCall(
-                'registerClient',
-                [
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('document'),
-                    ],
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('names'),
-                    ],
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('email'),
-                    ],
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('phone'),
-                    ],
-                ]
-            );
+            $response = $this->soapClient->registerClient([
+                'document' => $request->input('document'),
+                'names' => $request->input('names'),
+                'email' => $request->input('email'),
+                'phone' => $request->input('phone'),
+            ]);
 
             return response()->json($response)->setStatusCode(200, 'OK');
         } catch (\SoapFault $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
-
 
     public function loadWallet(Request $request)
     {
         try {
-            $response = $this->soapClient->__soapCall(
-                'RechargeWallet',
-                [
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('document'),
-                    ],
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('phone'),
-                    ],
-                    [
-                        'type' => 'decimal',
-                        'value' => $request->input('value'),
-                    ],
-                ]
-            );
+            $response = $this->soapClient->RechargeWallet([
+                'document' => $request->input('document'),
+                'phone' => $request->input('phone'),
+                'value' => $request->input('value'),
+            ]);
 
             return response()->json($response)->setStatusCode(200, 'OK');
         } catch (\SoapFault $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
-
 
     public function pay(Request $request)
     {
         try {
-            $response = $this->soapClient->__soapCall(
-                'MakePayment',
-                [
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('sessionId'),
-                    ],
-                    [
-                        'type' => 'decimal',
-                        'value' => $request->input('amount'),
-                    ],
-                ]
-            );
+            $response = $this->soapClient->MakePayment([
+                'sessionId' => $request->input('sessionId'),
+                'amount' => $request->input('amount'),
+            ]);
 
             return response()->json($response)->setStatusCode(200, 'OK');
         } catch (\SoapFault $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
-
 
     public function confirmPayment(Request $request)
     {
         try {
-            $response = $this->soapClient->__soapCall(
-                'ConfirmPayment',
-                [
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('sessionId'),
-                    ],
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('token'),
-                    ],
-                ]
-            );
+            $response = $this->soapClient->ConfirmPayment([
+                'sessionId' => $request->input('sessionId'),
+                'token' => $request->input('token'),
+            ]);
 
             return response()->json($response)->setStatusCode(200, 'OK');
         } catch (\SoapFault $e) {
@@ -142,24 +87,13 @@ class SoapClientController extends Controller
         }
     }
 
-
-
     public function checkBalance(Request $request)
     {
         try {
-            $response = $this->soapClient->__soapCall(
-                'checkBalance',
-                [
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('document'),
-                    ],
-                    [
-                        'type' => 'string',
-                        'value' => $request->input('phone'),
-                    ],
-                ]
-            );
+            $response = $this->soapClient->checkBalance([
+                'document' => $request->input('document'),
+                'phone' => $request->input('phone'),
+            ]);
 
             return response()->json($response)->setStatusCode(200, 'OK');
         } catch (\SoapFault $e) {
