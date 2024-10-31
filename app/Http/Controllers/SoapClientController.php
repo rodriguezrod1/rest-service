@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use RicorocksDigitalAgency\Soap\Facades\Soap;
+//use RicorocksDigitalAgency\Soap\Facades\Soap;
 
 class SoapClientController extends Controller
 {
@@ -16,7 +16,7 @@ class SoapClientController extends Controller
      */
     public function __construct()
     {
-        $this->soapClient = Soap::create('http://localhost:8001/soap?wsdll', [
+        $this->soapClient = new \SoapClient('http://localhost:8001/soap?wsdl', [
             'trace' => 1,
             'exceptions' => true,
             'stream_context' => stream_context_create([
